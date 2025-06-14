@@ -18,22 +18,29 @@ void solve() {
 
     int n;
     cin >> n;
-    map<int, int> m;
+
+    int MAX = 1e5;
+    vector<int> vec(MAX, 0);
     for (int i = 0; i < n; i++) {
         int x;
         cin >> x;
-        m[x]++;
+        vec[x]++;
     }
 
     int total = 0;
-    for (auto it : m) {
-        if (it.first != it.second) {
-            if (it.first < it.second) {
-                total += (it.second -it.first);
+    for (int i = 1; i < MAX; i++) {
+        if (vec[i] == 0) {
+            continue;
+        }   
+        //cout << i << " " << vec[i] << endl;
+        if (vec[i] != i) {
+            if (vec[i] > i) {
+                total += (vec[i] - i);
             } else {
-                total += it.second;
+                total += vec[i];
             }
         }
+        
     }
     cout << total << endl;
 }
